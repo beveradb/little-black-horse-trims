@@ -191,7 +191,13 @@
     .gallery-grid img:hover { transform: scale(1.02); }
 
     /* REVIEWS */
-    .reviews { background: var(--light); }
+    .reviews {
+      background: var(--black);
+      color: var(--white);
+      overflow: hidden;
+    }
+    .reviews .section-title { color: var(--white); }
+    .reviews .section-subtitle { color: rgba(255,255,255,0.6); }
     .reviews-header {
       display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
       margin-bottom: 0.5rem;
@@ -203,47 +209,84 @@
       font-size: 0.82rem; font-weight: 600;
     }
     .reviews-badge svg { width: 14px; height: 14px; fill: currentColor; }
-    .reviews-grid {
-      columns: 2; column-gap: 1.25rem;
+    .reviews-scroll-wrapper {
+      position: relative;
+      margin: 0 -1.5rem;
+      padding: 0 1.5rem;
     }
+    .reviews-scroll-wrapper::before,
+    .reviews-scroll-wrapper::after {
+      content: ""; position: absolute; top: 0; bottom: 0; width: 4rem; z-index: 2;
+      pointer-events: none;
+    }
+    .reviews-scroll-wrapper::before { left: 0; background: linear-gradient(to right, var(--black), transparent); }
+    .reviews-scroll-wrapper::after { right: 0; background: linear-gradient(to left, var(--black), transparent); }
+    .reviews-track {
+      display: flex; gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0.5rem 2rem 1.5rem;
+    }
+    .reviews-track::-webkit-scrollbar { display: none; }
     .review-card {
-      break-inside: avoid;
-      background: var(--white); padding: 1.5rem; border-radius: 8px;
-      border: 1px solid rgba(0,0,0,0.06);
-      margin-bottom: 1.25rem;
+      flex: 0 0 340px;
+      scroll-snap-align: start;
+      background: var(--dark);
+      padding: 1.75rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .review-stars {
+      color: #f59e0b; font-size: 0.85rem; letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+    .review-quote {
+      position: absolute; top: 1rem; right: 1.25rem;
+      font-size: 4rem; line-height: 1; font-family: Georgia, serif;
+      color: rgba(255,255,255,0.06); pointer-events: none;
     }
     .review-text {
-      font-size: 0.95rem; line-height: 1.7; color: var(--text);
-      margin-bottom: 1rem;
+      font-size: 0.95rem; line-height: 1.75; color: rgba(255,255,255,0.85);
+      margin-bottom: 1.25rem;
+      position: relative;
     }
-    .review-text::before { content: "\201C"; }
-    .review-text::after { content: "\201D"; }
     .review-reply {
-      background: var(--light); border-radius: 6px; padding: 0.75rem 1rem;
-      margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-light);
+      background: rgba(255,255,255,0.05); border-radius: 8px; padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem; font-size: 0.82rem; color: rgba(255,255,255,0.55);
       border-left: 3px solid var(--accent);
     }
     .review-reply strong {
-      display: block; font-size: 0.8rem; color: var(--text);
-      margin-bottom: 0.25rem;
+      display: block; font-size: 0.78rem; color: rgba(255,255,255,0.7);
+      margin-bottom: 0.2rem;
     }
     .review-meta {
       display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
     .review-author {
-      font-weight: 600; font-size: 0.9rem; color: var(--black);
+      font-weight: 600; font-size: 0.9rem; color: var(--white);
     }
     .review-date {
-      font-size: 0.8rem; color: var(--text-light);
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
     }
     .reviews-fb-link {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      margin-top: 1.5rem; padding: 0.75rem 1.5rem;
-      background: var(--fb-blue); color: var(--white);
+      margin-top: 2rem; padding: 0.75rem 1.5rem;
+      background: rgba(255,255,255,0.1); color: var(--white);
       text-decoration: none; border-radius: 4px; font-size: 0.9rem;
       font-weight: 500; transition: background 0.2s;
+      border: 1px solid rgba(255,255,255,0.15);
     }
-    .reviews-fb-link:hover { background: #1565d8; }
+    .reviews-fb-link:hover { background: rgba(255,255,255,0.18); }
 
     /* FACEBOOK SECTION */
     .facebook-section { background: var(--white); }
@@ -320,7 +363,7 @@
       section { padding: 3.5rem 1.25rem; }
       .stats { gap: 2rem; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .reviews-grid { columns: 1; }
+      .review-card { flex: 0 0 280px; }
       .fb-layout {
         grid-template-columns: 1fr;
       }
@@ -363,7 +406,7 @@
     <p class="tagline">Barefoot trimming &amp; hoof building</p>
     <p class="location">Columbia, SC</p>
     <div class="hero-contact">
-      <p class="hero-name">Mariah</p>
+      <p class="hero-name">Mariah Simmons</p>
       <a href="tel:+12533443145" class="hero-phone">
         <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         (253) 344-3145
@@ -450,136 +493,162 @@
       </span>
     </div>
     <p class="section-subtitle">What horse owners are saying about Mariah.</p>
-    <div class="reviews-grid">
+    <div class="reviews-scroll-wrapper">
+      <div class="reviews-track">
 
-      <div class="review-card">
-        <p class="review-text">Mariah is a knowledgeable barefoot trimmer that really cares. Highly recommend!</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Thank you so much!!
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Mariah is a knowledgeable barefoot trimmer that really cares. Highly recommend!</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Thank you so much!!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Robin Boyle</span>
+            <span class="review-date">April 2026</span>
+          </div>
         </div>
-        <div class="review-meta">
-          <span class="review-author">Robin Boyle</span>
-          <span class="review-date">April 2026</span>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Mariah is so patient and willing to meet the horse wherever they're at! I have a very challenging horse who struggles with having his feet done. She has been a godsend with not only getting the job done, but also working a schedule to keep his feet healthy and improve how the process goes. I highly recommend her!!!!</p>
+          <div class="review-meta">
+            <span class="review-author">Stacey Manning</span>
+            <span class="review-date">March 2026</span>
+          </div>
         </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Mariah has been a God send. She's been trimming my horses for the last 3 months and every single time she puts their feet back down they lick, chew, yawn, and look at her like they are telling her thank you! I can't wait to see how my horses feet are another 3-6 months from now. I'm a client for life!</p>
+          <div class="review-meta">
+            <span class="review-author">Jessica Marie Wolf</span>
+            <span class="review-date">December 2025</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">So thankful for Mariah. She has recently started doing our two mares and has been nothing short of amazing. She is patient, on time and always does a great job. She cares for your horses more than any farrier I have met. Highly recommend!</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Thank you so much!!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Caitlyn Morris</span>
+            <span class="review-date">August 2025</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Mariah has turned my whole herd around. We have been able to pull shoes on horses who &ldquo;needed&rdquo; them and they are completely sound and comfortable barefoot! She always shows up the day you schedule and has great communication. She is willing to work on the challenging hooves others wont.</p>
+          <div class="review-meta">
+            <span class="review-author">Devon Tracy</span>
+            <span class="review-date">June 2025</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">I am so glad to have Mariah in my area! She has my geldings, both young and old, looking and feeling better from the very first trim. She cares about the whole horse, and not just their hooves. My herd only wishes I found her sooner. You can't go wrong, and your horses will thank you.</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Thank you!!!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Bridget Edge</span>
+            <span class="review-date">April 2025</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Mariah is wonderful, my horse loves her and soon my neighbors horses will too. My girl is easy, but the neighbors horses are a bit difficult, Mariah is very patient with them. In time they will be as easy as my horse!</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Aww thank you!! Cat is a wonderful girl! The feeling is mutual!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Alexa Nye</span>
+            <span class="review-date">April 2025</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Mariah has been awesome to have as our barefoot farrier. She comes regularly, every 4 weeks, and my horse hooves have never looked so great. We dealt with ongoing sulcus thrush on one horse that cleared up in 3 weeks after her trim. She's a true horse lover.</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Aww thank you so much!! I love your boys!!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Shelly Gottschling</span>
+            <span class="review-date">February 2025</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">She takes her time and is so sweet with the ponies. Their feet look great and have already seen a difference in their movement!</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Thank you!!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Brianna Curle</span>
+            <span class="review-date">January 2025</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Doing such a wonderful job with my gelding! He's never been sore after a trim and she is so incredibly patient.</p>
+          <div class="review-meta">
+            <span class="review-author">Spotted Horse LLC</span>
+            <span class="review-date">December 2024</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">Mariah is so wonderful and my horse loves her. She takes her time to make sure he is comfortable during the trim. She has an eye for detail and notices what the hoof is telling us! She eliminated hoof wall separation and chipping I had been fighting all summer in two trims. We are grateful to have found her.</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Aww thank you!! Biggie is a great guy!! Glad I get to work with him!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Caroline Kosh</span>
+            <span class="review-date">November 2024</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="review-quote">&ldquo;</span>
+          <p class="review-text">She was wonderful with my gelding. Took her time, explained everything to me in detail, and made sure my horse was super comfortable throughout it and he adored her. Licking and chewing, yawning, and falling asleep!</p>
+          <div class="review-reply">
+            <strong>Mariah replied:</strong>
+            Thank you Chloe! Perry was a sweetheart, I look forward to hanging out with him some more!
+          </div>
+          <div class="review-meta">
+            <span class="review-author">Chloe Johnson</span>
+            <span class="review-date">November 2024</span>
+          </div>
+        </div>
+
       </div>
-
-      <div class="review-card">
-        <p class="review-text">Mariah is so patient and willing to meet the horse wherever they're at! I have a very challenging horse who struggles with having his feet done. She has been a godsend with not only getting the job done, but also working a schedule to keep his feet healthy and improve how the process goes. I highly recommend her!!!!</p>
-        <div class="review-meta">
-          <span class="review-author">Stacey Manning</span>
-          <span class="review-date">March 2026</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">Mariah has been a God send. She's been trimming my horses for the last 3 months and every single time she puts their feet back down they lick, chew, yawn, and look at her like they are telling her thank you! I can't wait to see how my horses feet are another 3-6 months from now. I'm a client for life! Thank you Mariah for saving both my horses!</p>
-        <div class="review-meta">
-          <span class="review-author">Jessica Marie Wolf</span>
-          <span class="review-date">December 2025</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">So thankful for Mariah. She has recently started doing our two mares and has been nothing short of amazing. She is patient, on time and always does a great job. She cares for your horses more than any farrier I have met. Highly recommend!</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Thank you so much!!
-        </div>
-        <div class="review-meta">
-          <span class="review-author">Caitlyn Morris</span>
-          <span class="review-date">August 2025</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">Mariah has turned my whole herd around. We have been able to pull shoes on horses who &ldquo;needed&rdquo; them and they are completely sound and comfortable barefoot! I highly recommend Mariah! She always shows up the day you schedule and has great communication. She is willing to work on the challenging hooves others wont.</p>
-        <div class="review-meta">
-          <span class="review-author">Devon Tracy</span>
-          <span class="review-date">June 2025</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">I am so glad to have Mariah in my area! She has my geldings, both young and old, looking and feeling better from the very first trim. She cares about the whole horse, and not just their hooves. My herd only wishes I found her sooner. You can't go wrong, and your horses will thank you.</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Thank you!!!
-        </div>
-        <div class="review-meta">
-          <span class="review-author">Bridget Edge</span>
-          <span class="review-date">April 2025</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">Mariah is wonderful, my horse loves her and soon my neighbors horses will too. My girl is easy, but the neighbors horses are a bit difficult, Mariah is very patient with them. In time they will be as easy as my horse!</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Aww thank you!! Cat is a wonderful girl! The feeling is mutual!
-        </div>
-        <div class="review-meta">
-          <span class="review-author">Alexa Nye</span>
-          <span class="review-date">April 2025</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">Mariah has been awesome to have as our barefoot farrier. She comes regularly, every 4 weeks, and my horse hooves have never looked so great. We dealt with ongoing sulcus thrush on one horse that cleared up in 3 weeks after her trim and sloughing the dead skin from the frog. She had a great suggestion for a specific product and is knowledgeable about nutrition as well as hooves. Best yet, she is very patient with my snarky horse, he doesn't hate the farrier anymore! She's a true horse lover.</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Aww thank you so much!! I love your boys!!
-        </div>
-        <div class="review-meta">
-          <span class="review-author">Shelly Gottschling</span>
-          <span class="review-date">February 2025</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">She takes her time and is so sweet with the ponies. Their feet look great and have already seen a difference in their movement!</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Thank you!!
-        </div>
-        <div class="review-meta">
-          <span class="review-author">Brianna Curle</span>
-          <span class="review-date">January 2025</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">Doing such a wonderful job with my gelding! He's never been sore after a trim and she is so incredibly patient.</p>
-        <div class="review-meta">
-          <span class="review-author">Spotted Horse LLC</span>
-          <span class="review-date">December 2024</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">Mariah is so wonderful and my horse loves her. She takes her time to make sure he is comfortable during the trim. She has an eye for detail and notices what the hoof is telling us! Her primary concern is the horse and what he needs which goes a long way with me. She eliminated hoof wall separation and chipping I had been fighting all summer in two trims. We are grateful to have found her.</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Aww thank you!! Biggie is a great guy!! Glad I get to work with him!
-        </div>
-        <div class="review-meta">
-          <span class="review-author">Caroline Kosh</span>
-          <span class="review-date">November 2024</span>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <p class="review-text">She was wonderful with my gelding. Took her time, explained everything to me in detail, and made sure my horse was super comfortable throughout it and he adored her. Licking and chewing, yawning, and falling asleep!</p>
-        <div class="review-reply">
-          <strong>Little Black Horse Barefoot Trims replied:</strong>
-          Thank you Chloe! Perry was a sweetheart, I look forward to hanging out with him some more!
-        </div>
-        <div class="review-meta">
-          <span class="review-author">Chloe Johnson</span>
-          <span class="review-date">November 2024</span>
-        </div>
-      </div>
-
     </div>
     <a href="https://www.facebook.com/profile.php?id=61569612563299&sk=reviews" target="_blank" rel="noopener" class="reviews-fb-link">
       <svg class="fb-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>

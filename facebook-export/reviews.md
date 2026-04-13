@@ -1,0 +1,131 @@
+# Reviews - Little Black Horse Barefoot Trims
+
+**Total: 12 reviews | 100% recommend**
+
+---
+
+### 1. Robin Boyle - Recommends
+**Date:** 2026-04-07
+
+**Link:** https://www.facebook.com/robin.szewczyk/posts/pfbid0269TNE7HUxpCh9jaaiUX2WHZMcoe6jP5kecEzueQYaNfo7MzuzY8jzxDdqb9h9CYul
+
+Mariah is a knowledgeable barefoot trimmer that really cares. Highly recommend!
+
+> **Little Black Horse Barefoot Trims** replied: Thank you so much!! 💜
+
+---
+
+### 2. Stacey Manning - Recommends
+**Date:** 2026-03-20
+
+**Link:** https://www.facebook.com/stacey.manning.921/posts/pfbid0jrPWMkkYzZaJgSi85i38kSzGV2wV9qN75NoZ1saek3mXvRV6e3mGAE7Hy5tLcQX6l
+
+Mariah is so patient and willing to meet the horse wherever they’re at! I have a very challenging horse who struggles with having his feet done. She has been a godsend with not only getting the job done, but also working a schedule to keep his feet healthy and improve how the process goes. I highly recommend her!!!!
+
+---
+
+### 3. Jessica Marie Wolf - Recommends
+**Date:** 2025-12-17
+
+**Link:** https://www.facebook.com/jessica.m.wolf.89/posts/pfbid02LNeUhU4Zim9fDwVjPExJh419L6UXcZB99A8Afc4k45bwMA8wKV4aDxsD7YNnoBDNl
+
+Mariah has been a God send. She’s been trimming my horses for the last 3 months and every single time she puts their feet back down they lick, chew, yawn, and look at her like they are telling her thank you! I can’t wait to see how my horses feet are another 3-6 months from now. I’m a client for life! Thank you Mariah for saving both my horses!
+
+---
+
+### 4. Caitlyn Morris - Recommends
+**Date:** 2025-07-31
+
+**Link:** https://www.facebook.com/caitlyn.morris.771/posts/pfbid035Z44cHHQw9xbShEhsWHRnPWZi43HwTr8m7YapwVrfJVZJroWN3D3J9yVHcpWGUdml
+
+So thankful for Mariah.  She has recently started doing our two mares and has been nothing short of amazing.  She is patient, on time and always does a great job.  She cares for your horses more than any farrier I have met.  Highly recommend!
+
+> **Little Black Horse Barefoot Trims** replied: Thank you so much!!
+
+---
+
+### 5. Devon Tracy - Recommends
+**Date:** 2025-06-05
+
+**Link:** https://www.facebook.com/devon.tracy/posts/pfbid0zy8Nx1QMnawso9KgUPQmrysetRPDuWF1krghoXmLGUFrEbNgMZimvLrtZ4oh1HvPl
+
+Mariah has turned my whole herd around. We have been able to pull shoes on horses who “needed” them and they are completely sound and comfortable barefoot! I highly recommend Mariah! She always shows up the day you schedule and has great communication. She is willing to work on the challenging hooves others wont.
+
+---
+
+### 6. Bridget Edge - Recommends
+**Date:** 2025-04-22
+
+**Link:** https://www.facebook.com/bridgetnedge/posts/pfbid0gPmc9TJZadmbTMatUAUUqvVnH9oVnD7e1kAdqd3RrFzPLhZaAX92AK8hVCNUMmLFl
+
+I am so glad to have Mariah in my area! She has my geldings, both young and old, looking and feeling better from the very first trim. She cares about the whole horse, and not just their hooves. My herd only wishes I found her sooner.  You can't go wrong, and your horses will thank you. ☺️
+
+> **Little Black Horse Barefoot Trims** replied: Thank you!!!
+
+---
+
+### 7. Alexa Nye - Recommends
+**Date:** 2025-04-19
+
+**Link:** https://www.facebook.com/alexanye/posts/pfbid02xt1gWns2x6ZAMir9R8ECk5LgR9hEtRk1rSvjtVU164ApdhzWnK1s2f8cFj3nDKG5l
+
+Mariah is wonderful, my horse loves her and soon my neighbors horses will too. My girl is easy, but the neighbors horses are a bit difficult, Mariah is very patient with them.In time they will be as easy as my horse!
+
+> **Little Black Horse Barefoot Trims** replied: Aww thank you!! Cat is a wonderful girl! The feeling is mutual!
+
+---
+
+### 8. Shelly Gottschling - Recommends
+**Date:** 2025-02-05
+
+**Link:** https://www.facebook.com/shellybellyg/posts/pfbid0Y4QVrSr4cimEkgDYP7GvYjJF81DVrVd9jkgMpdzip3HudWsyR7HrBgdxtM5P9DUhl
+
+Mariah has been awesome to have as our barefoot farrier. She comes regularly, every 4 weeks, and my horse hooves have never looked so great. We dealt with ongoing sulcus thrush on one horse that cleared up in 3 weeks after her trim and sloughing the dead skin from the frog. She had a great suggestion for a specific product and is knowledgeable about nutrition as well as hooves. 
+Best yet, she is very patient with my snarky horse, he doesn’t hate the farrier anymore! She’s a true horse lover.
+
+> **Little Black Horse Barefoot Trims** replied: Aww thank you so much!! I love your boys!!
+
+---
+
+### 9. Brianna Curle - Recommends
+**Date:** 2025-01-25
+
+**Link:** https://www.facebook.com/brianna.curle/posts/pfbid02MdbiQrE1siFoKic8ji4mefhH4kdrqnqJVrC3Sivr7S9QZRFR59oEVVxTQD96vSAfl
+
+She takes her time and is so sweet with the ponies. Their feet look great and have already seen a difference in their movement!
+
+> **Little Black Horse Barefoot Trims** replied: Thank you!!
+
+---
+
+### 10. Spotted Horse LLC - Recommends
+**Date:** 2024-12-29
+
+**Link:** https://www.facebook.com/permalink.php?story_fbid=pfbid02FNoYjazhq3D3rFkutrwaiZHCfhcmVHXkamLV8Buy4fzo1JLwpkWf5ha4Tw7Q4xnel&id=61552831686453
+
+Doing such a wonderful job with my gelding! He’s never been sore after and trim and she is so incredibly patient.
+
+---
+
+### 11. Caroline Kosh - Recommends
+**Date:** 2024-11-24
+
+**Link:** https://www.facebook.com/marycaroline.kosh/posts/pfbid02uVDW8pUFsNTnuc4fBgHLmVVoK56xZSFsMr1roB33iEdZJ3BAKcV1UuL2EhAubcgwl
+
+Mariah is so wonderful and my horse loves her. She takes her time to make sure he is comfortable during the trim. She has an eye for detail and notices what the hoof is telling us! Her primary concern is the horse and what he needs which goes a long way with me. She eliminated hoof wall separation and chipping I had been fighting all summer in two trims. We are grateful to have found her.
+
+> **Little Black Horse Barefoot Trims** replied: Aww thank you!! Biggie is a great guy!! Glad I get to work with him! 💜
+
+---
+
+### 12. Chloe Johnson - Recommends
+**Date:** 2024-11-24
+
+**Link:** https://www.facebook.com/chloe.johnson.531597/posts/pfbid02VogRAdXfvajKVsBzAaNT2nqFep59zieBLqyk2xUpuaZmjDYH8NVxoE5tE1JKDF7Ul
+
+She was wonderful with my gelding. Took her time, explained everything to me in detail, and made sure my horse was super comfortable throughout it and he adored her. Licking and chewing, yawning , and falling asleep!
+
+> **Little Black Horse Barefoot Trims** replied: Thank you Chloe! Perry was a sweetheart, I look forward to hanging out with him some more!
+
+---
+

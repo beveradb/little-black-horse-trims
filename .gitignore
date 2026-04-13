@@ -1,7 +1,20 @@
 .DS_Store
 .playwright-mcp/
-page-*.png
-page-*.md
+
+# Facebook export - downloaded photos (too large for git)
+facebook-export/photos/
+
+# Scraping artifacts (cookies, raw API responses, debug files)
+cookies.txt
+*.png
+!images/*.png
+raw_response_*.json
+raw_reviews_*.json
+review_response_part_*.json
+review2_part_*.json
+graphql-requests.txt
+reviews-graphql.txt
+all_image_urls.txt
+unique_image_urls.txt
 extracted-content.json
-photos/
-littleblackhorse-logo.png
+page-snapshot-*.md
