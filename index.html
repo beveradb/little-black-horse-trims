@@ -11,367 +11,546 @@
   <meta property="og:url" content="https://littleblackhorse.com">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --black: #1a1a1a;
-      --dark: #2c2c2c;
-      --warm: #4a3728;
-      --accent: #6b4c3b;
-      --light: #f5f0eb;
-      --white: #ffffff;
-      --text: #3a3a3a;
-      --text-light: #6a6a6a;
+      --espresso: #1c1208;
+      --dark: #2a1f14;
+      --leather: #7a5c3e;
+      --sage: #5a7050;
+      --gold: #c4943a;
+      --cream: #faf5ed;
+      --ivory: #f0ebe2;
+      --parchment: #e8e0d4;
+      --text: #2d2218;
+      --text-mid: #6b5d4f;
+      --text-light: #9a8b7a;
+      --white: #fefcf9;
       --fb-blue: #1877f2;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: 'Outfit', sans-serif;
       color: var(--text);
       line-height: 1.6;
-      background: var(--white);
+      background: var(--cream);
+      font-weight: 400;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* GRAIN TEXTURE OVERLAY */
+    body::after {
+      content: "";
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px;
+    }
+
+    /* SCROLL ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(26, 26, 26, 0.92);
-      backdrop-filter: blur(8px);
-      padding: 0.75rem 1.5rem;
+      background: rgba(28, 18, 8, 0.88);
+      backdrop-filter: blur(12px);
+      padding: 0.65rem 2rem;
       display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(196, 148, 58, 0.15);
     }
     nav .brand {
       display: flex; align-items: center; gap: 0.75rem;
-      text-decoration: none; color: var(--white);
+      text-decoration: none; color: var(--cream);
     }
-    nav .brand img { width: 36px; height: 36px; border-radius: 50%; }
-    nav .brand span { font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; }
-    nav .links { display: flex; align-items: center; gap: 1.5rem; }
+    nav .brand img {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1.5px solid rgba(196, 148, 58, 0.4);
+    }
+    nav .brand span {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; font-size: 1.15rem; letter-spacing: 0.02em;
+    }
+    nav .links { display: flex; align-items: center; gap: 1.75rem; }
     nav .links a {
-      color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem;
-      letter-spacing: 0.03em; text-transform: uppercase; transition: color 0.2s;
+      color: rgba(250, 245, 237, 0.65); text-decoration: none; font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s;
+      font-weight: 500;
     }
-    nav .links a:hover { color: var(--white); }
+    nav .links a:hover { color: var(--gold); }
     nav .links .nav-fb {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      background: var(--fb-blue); color: var(--white);
-      padding: 0.4rem 0.85rem; border-radius: 4px;
-      font-size: 0.8rem; text-transform: none; letter-spacing: 0;
+      background: rgba(250, 245, 237, 0.08); color: var(--cream);
+      padding: 0.4rem 0.9rem; border-radius: 3px;
+      font-size: 0.75rem; text-transform: none; letter-spacing: 0.03em;
+      border: 1px solid rgba(250, 245, 237, 0.12);
+      transition: background 0.3s, border-color 0.3s;
     }
-    nav .links .nav-fb:hover { background: #1565d8; }
+    nav .links .nav-fb:hover { background: rgba(250, 245, 237, 0.14); border-color: rgba(250, 245, 237, 0.2); }
 
     /* HERO */
     .hero {
       position: relative; min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
-      background: var(--black);
+      background: var(--espresso);
       overflow: hidden;
     }
     .hero::before {
       content: ""; position: absolute; inset: 0;
-      background: url('images/hero.jpg') center/cover no-repeat;
-      opacity: 0.45;
+      background: url('images/hero.jpg') center 30%/cover no-repeat;
+      opacity: 0.35;
+      filter: saturate(0.7);
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(28,18,8,0.4) 0%, rgba(28,18,8,0.1) 40%, rgba(28,18,8,0.6) 100%);
     }
     .hero-content {
-      position: relative; text-align: center; padding: 2rem;
-      max-width: 700px;
+      position: relative; z-index: 2; text-align: center; padding: 2rem;
+      max-width: 750px;
     }
     .hero-content img {
-      width: 160px; height: 160px; border-radius: 50%;
-      border: 3px solid rgba(255,255,255,0.9);
-      margin-bottom: 1.5rem;
+      width: 140px; height: 140px; border-radius: 50%;
+      border: 2px solid rgba(196, 148, 58, 0.5);
+      margin-bottom: 2rem;
       background: var(--white);
+      box-shadow: 0 0 60px rgba(196, 148, 58, 0.15);
+      animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+    @keyframes logoReveal {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
     }
     .hero-content h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      color: var(--white); font-weight: 700;
-      letter-spacing: 0.02em; margin-bottom: 0.75rem;
-      line-height: 1.15;
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      color: var(--cream); font-weight: 400;
+      letter-spacing: 0.01em; margin-bottom: 0.75rem;
+      line-height: 1.1;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
     }
-    .hero-content .tagline {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: rgba(255,255,255,0.85); margin-bottom: 0.5rem;
+    .hero-content h1 em {
+      font-style: italic; font-weight: 500;
+      color: var(--gold);
     }
-    .hero-content .location {
-      font-size: 0.95rem; color: rgba(255,255,255,0.65);
-      margin-bottom: 1.25rem;
+    .hero-tagline {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: rgba(250, 245, 237, 0.7);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 0.4rem; font-weight: 300;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+    }
+    .hero-location {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; color: rgba(250, 245, 237, 0.5);
+      font-style: italic;
+      margin-bottom: 2rem;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
     }
     .hero-contact {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
     }
     .hero-contact .hero-name {
-      font-size: 1.1rem; color: rgba(255,255,255,0.9);
-      font-weight: 500; margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; color: rgba(250, 245, 237, 0.85);
+      font-weight: 500; margin-bottom: 0.35rem;
     }
     .hero-contact .hero-phone {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 1.3rem; color: var(--white); font-weight: 700;
-      text-decoration: none; letter-spacing: 0.02em;
-      transition: opacity 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 1.4rem; color: var(--gold); font-weight: 600;
+      text-decoration: none; letter-spacing: 0.03em;
+      transition: opacity 0.3s;
     }
-    .hero-contact .hero-phone:hover { opacity: 0.85; }
-    .hero-contact .hero-phone svg { width: 20px; height: 20px; fill: currentColor; opacity: 0.8; }
+    .hero-contact .hero-phone:hover { opacity: 0.8; }
+    .hero-contact .hero-phone svg { width: 22px; height: 22px; fill: currentColor; opacity: 0.7; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .hero-ctas {
       display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
     }
     .hero-content .cta {
-      display: inline-block; padding: 0.85rem 2.2rem;
-      background: var(--white); color: var(--black);
-      text-decoration: none; font-weight: 600; font-size: 0.95rem;
-      border-radius: 4px; letter-spacing: 0.02em;
-      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-block; padding: 0.9rem 2.5rem;
+      background: var(--gold); color: var(--espresso);
+      text-decoration: none; font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      border: none;
     }
-    .hero-content .cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-    .hero-content .cta-fb {
-      background: var(--fb-blue); color: var(--white);
+    .hero-content .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(196, 148, 58, 0.3);
+      background: #d4a44a;
+    }
+    .hero-content .cta-secondary {
+      background: transparent; color: var(--cream);
+      border: 1px solid rgba(250, 245, 237, 0.25);
       display: inline-flex; align-items: center; gap: 0.5rem;
     }
-    .hero-content .cta-fb:hover { background: #1565d8; }
+    .hero-content .cta-secondary:hover {
+      background: rgba(250, 245, 237, 0.08);
+      box-shadow: none;
+      border-color: rgba(250, 245, 237, 0.4);
+    }
+
+    /* SECTION DIVIDER */
+    .section-divider {
+      display: flex; align-items: center; justify-content: center;
+      padding: 0; margin: 0;
+    }
+    .section-divider svg {
+      width: 48px; height: 48px;
+      color: var(--leather);
+      opacity: 0.3;
+    }
 
     /* SECTIONS */
-    section { padding: 5rem 1.5rem; }
-    .container { max-width: 900px; margin: 0 auto; }
+    section { padding: 6rem 2rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--leather); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-label::before {
+      content: ""; width: 2rem; height: 1px; background: var(--leather); opacity: 0.5;
+    }
     .section-title {
-      font-size: 1.8rem; font-weight: 700; color: var(--black);
-      margin-bottom: 0.5rem; letter-spacing: 0.01em;
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 400; color: var(--espresso);
+      margin-bottom: 0.75rem; line-height: 1.15;
     }
     .section-subtitle {
-      font-size: 1rem; color: var(--text-light); margin-bottom: 2.5rem;
+      font-size: 1rem; color: var(--text-mid); margin-bottom: 3rem;
+      max-width: 550px; line-height: 1.7;
     }
 
     /* SERVICES */
-    .services { background: var(--light); }
+    .services { background: var(--white); }
     .services-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0;
     }
     .service-card {
-      background: var(--white); padding: 2rem; border-radius: 6px;
-      border: 1px solid rgba(0,0,0,0.06);
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--parchment);
+      position: relative;
+      transition: background 0.4s;
     }
+    .service-card:hover { background: var(--ivory); }
+    .service-card + .service-card { border-left: none; }
+    .service-icon-wrap {
+      width: 56px; height: 56px;
+      margin-bottom: 1.5rem;
+      color: var(--leather);
+    }
+    .service-icon-wrap svg { width: 100%; height: 100%; }
     .service-card h3 {
-      font-size: 1.15rem; color: var(--black); margin-bottom: 0.5rem;
+      font-size: 1.5rem; color: var(--espresso); margin-bottom: 0.75rem;
+      font-weight: 500;
     }
-    .service-card p { font-size: 0.92rem; color: var(--text-light); line-height: 1.6; }
-    .service-icon {
-      font-size: 1.6rem; margin-bottom: 0.75rem; display: block;
+    .service-card p {
+      font-size: 0.92rem; color: var(--text-mid); line-height: 1.7;
     }
 
     /* ABOUT */
-    .about-text {
-      font-size: 1.05rem; line-height: 1.8; color: var(--text);
-      max-width: 700px;
+    .about { background: var(--cream); }
+    .about-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: start;
     }
-    .about-text p + p { margin-top: 1rem; }
+    .about-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem; line-height: 1.5;
+      color: var(--espresso); font-weight: 400;
+      font-style: italic;
+      position: relative;
+      padding-left: 2rem;
+      border-left: 3px solid var(--gold);
+    }
+    .about-text p {
+      font-size: 0.95rem; line-height: 1.85; color: var(--text-mid);
+      margin-bottom: 1.25rem;
+    }
     .stats {
-      display: flex; gap: 3rem; margin-top: 2rem;
-      flex-wrap: wrap;
+      display: flex; gap: 3rem; margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--parchment);
     }
     .stat-item .stat-value {
-      font-size: 1.5rem; font-weight: 700; color: var(--black);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 600; color: var(--espresso);
+      line-height: 1;
     }
     .stat-item .stat-label {
-      font-size: 0.85rem; color: var(--text-light);
+      font-size: 0.78rem; color: var(--text-light);
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-top: 0.3rem;
     }
 
     /* GALLERY */
-    .gallery { background: var(--light); }
+    .gallery { background: var(--white); }
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 0.75rem;
     }
     .gallery-grid img {
-      width: 100%; aspect-ratio: 1; object-fit: cover;
-      border-radius: 4px; transition: transform 0.3s;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s;
+      filter: saturate(0.85);
     }
-    .gallery-grid img:hover { transform: scale(1.02); }
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+      filter: saturate(1);
+    }
+    .gallery-grid .gallery-tall { grid-row: span 2; }
+    .gallery-item {
+      overflow: hidden; position: relative;
+    }
+    .gallery-item::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(28,18,8,0.15) 100%);
+      pointer-events: none;
+    }
 
     /* REVIEWS */
     .reviews {
-      background: var(--black);
-      color: var(--white);
+      background: var(--espresso);
+      color: var(--cream);
       overflow: hidden;
+      position: relative;
     }
-    .reviews .section-title { color: var(--white); }
-    .reviews .section-subtitle { color: rgba(255,255,255,0.6); }
+    .reviews::before {
+      content: ""; position: absolute; inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4943a'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .reviews .section-label { color: var(--gold); }
+    .reviews .section-label::before { background: var(--gold); }
+    .reviews .section-title { color: var(--cream); }
+    .reviews .section-subtitle { color: rgba(250,245,237,0.5); }
     .reviews-header {
-      display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
-      margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+      margin-bottom: 0.75rem;
     }
     .reviews-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      background: #16a34a; color: var(--white);
-      padding: 0.3rem 0.75rem; border-radius: 20px;
-      font-size: 0.82rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: var(--sage); color: var(--cream);
+      padding: 0.3rem 0.85rem; border-radius: 2px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
     }
-    .reviews-badge svg { width: 14px; height: 14px; fill: currentColor; }
+    .reviews-badge svg { width: 13px; height: 13px; fill: currentColor; }
     .reviews-scroll-wrapper {
       position: relative;
-      margin: 0 -1.5rem;
-      padding: 0 1.5rem;
+      margin: 0 -2rem; padding: 0 2rem;
     }
     .reviews-scroll-wrapper::before,
     .reviews-scroll-wrapper::after {
-      content: ""; position: absolute; top: 0; bottom: 0; width: 4rem; z-index: 2;
+      content: ""; position: absolute; top: 0; bottom: 0; width: 6rem; z-index: 2;
       pointer-events: none;
     }
-    .reviews-scroll-wrapper::before { left: 0; background: linear-gradient(to right, var(--black), transparent); }
-    .reviews-scroll-wrapper::after { right: 0; background: linear-gradient(to left, var(--black), transparent); }
+    .reviews-scroll-wrapper::before { left: 0; background: linear-gradient(to right, var(--espresso), transparent); }
+    .reviews-scroll-wrapper::after { right: 0; background: linear-gradient(to left, var(--espresso), transparent); }
     .reviews-track {
-      display: flex; gap: 1.25rem;
+      display: flex; gap: 1.5rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 0.5rem 2rem 1.5rem;
+      padding: 1rem 3rem 2rem;
     }
     .reviews-track::-webkit-scrollbar { display: none; }
     .review-card {
-      flex: 0 0 340px;
+      flex: 0 0 360px;
       scroll-snap-align: start;
-      background: var(--dark);
-      padding: 1.75rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(250, 245, 237, 0.04);
+      padding: 2rem;
+      border: 1px solid rgba(196, 148, 58, 0.12);
       position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
     }
     .review-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      transform: translateY(-4px);
+      border-color: rgba(196, 148, 58, 0.3);
     }
     .review-stars {
-      color: #f59e0b; font-size: 0.85rem; letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
+      color: var(--gold); font-size: 0.9rem; letter-spacing: 0.15em;
+      margin-bottom: 1rem;
     }
     .review-quote {
-      position: absolute; top: 1rem; right: 1.25rem;
-      font-size: 4rem; line-height: 1; font-family: Georgia, serif;
-      color: rgba(255,255,255,0.06); pointer-events: none;
+      position: absolute; top: 0.5rem; right: 1.25rem;
+      font-size: 5rem; line-height: 1;
+      font-family: 'Cormorant Garamond', serif;
+      color: rgba(196, 148, 58, 0.08); pointer-events: none;
     }
     .review-text {
-      font-size: 0.95rem; line-height: 1.75; color: rgba(255,255,255,0.85);
-      margin-bottom: 1.25rem;
+      font-size: 0.95rem; line-height: 1.8; color: rgba(250,245,237,0.8);
+      margin-bottom: 1.5rem;
       position: relative;
     }
     .review-reply {
-      background: rgba(255,255,255,0.05); border-radius: 8px; padding: 0.75rem 1rem;
-      margin-bottom: 1.25rem; font-size: 0.82rem; color: rgba(255,255,255,0.55);
-      border-left: 3px solid var(--accent);
+      background: rgba(250,245,237,0.04);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem; font-size: 0.82rem; color: rgba(250,245,237,0.5);
+      border-left: 2px solid var(--gold);
     }
     .review-reply strong {
-      display: block; font-size: 0.78rem; color: rgba(255,255,255,0.7);
-      margin-bottom: 0.2rem;
+      display: block; font-size: 0.75rem; color: var(--gold);
+      margin-bottom: 0.2rem; letter-spacing: 0.04em;
     }
     .review-meta {
       display: flex; align-items: center; justify-content: space-between;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(250,245,237,0.06);
     }
     .review-author {
-      font-weight: 600; font-size: 0.9rem; color: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; font-size: 1.05rem; color: var(--cream);
     }
     .review-date {
-      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      font-size: 0.72rem; color: rgba(250,245,237,0.3);
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
     .reviews-fb-link {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      margin-top: 2rem; padding: 0.75rem 1.5rem;
-      background: rgba(255,255,255,0.1); color: var(--white);
-      text-decoration: none; border-radius: 4px; font-size: 0.9rem;
-      font-weight: 500; transition: background 0.2s;
-      border: 1px solid rgba(255,255,255,0.15);
+      margin-top: 2.5rem; padding: 0.8rem 1.75rem;
+      background: transparent; color: var(--gold);
+      text-decoration: none; font-size: 0.8rem;
+      font-weight: 500; transition: background 0.3s, color 0.3s;
+      border: 1px solid rgba(196, 148, 58, 0.25);
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .reviews-fb-link:hover { background: rgba(255,255,255,0.18); }
+    .reviews-fb-link:hover { background: rgba(196, 148, 58, 0.1); }
 
     /* FACEBOOK SECTION */
-    .facebook-section { background: var(--white); }
+    .facebook-section { background: var(--cream); }
     .fb-layout {
       display: grid;
       grid-template-columns: 340px 1fr;
-      gap: 2.5rem;
-      align-items: start;
+      gap: 2.5rem; align-items: start;
     }
-    .fb-sidebar {
-      position: sticky; top: 5rem;
-    }
+    .fb-sidebar { position: sticky; top: 5rem; }
     .fb-sidebar .fb-page-wrapper {
-      background: #f6f7f8;
-      border-radius: 8px;
-      overflow: hidden;
-      min-height: 500px;
+      background: var(--ivory); border: 1px solid var(--parchment);
+      overflow: hidden; min-height: 500px;
     }
-    .fb-posts {
-      display: flex; flex-direction: column; gap: 1.5rem;
-    }
+    .fb-posts { display: flex; flex-direction: column; gap: 1.5rem; }
     .fb-posts .fb-post-wrapper {
-      background: #f6f7f8;
-      border-radius: 8px;
-      overflow: hidden;
-      min-height: 200px;
+      background: var(--ivory); border: 1px solid var(--parchment);
+      overflow: hidden; min-height: 200px;
     }
     .fb-view-all {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      background: var(--fb-blue); color: var(--white);
-      text-decoration: none; font-weight: 600; font-size: 0.95rem;
-      border-radius: 4px; transition: background 0.2s;
-      margin-top: 0.5rem;
+      padding: 0.8rem 1.75rem;
+      background: var(--fb-blue); color: var(--cream);
+      text-decoration: none; font-weight: 600; font-size: 0.8rem;
+      transition: background 0.3s; margin-top: 0.5rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
     .fb-view-all:hover { background: #1565d8; }
-    .fb-icon {
-      width: 20px; height: 20px; fill: currentColor; flex-shrink: 0;
-    }
+    .fb-icon { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
 
     /* CONTACT */
-    .contact-info {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem; margin-bottom: 2rem;
+    .contact {
+      background: var(--white);
+      position: relative;
     }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: start;
+    }
+    .contact-details { }
+    .contact-item { margin-bottom: 2rem; }
     .contact-item h3 {
-      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
-      color: var(--text-light); margin-bottom: 0.5rem;
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--text-light); margin-bottom: 0.5rem; font-weight: 500;
+      font-family: 'Outfit', sans-serif;
     }
     .contact-item a, .contact-item p {
-      font-size: 1.05rem; color: var(--black); text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; color: var(--espresso); text-decoration: none;
+      font-weight: 500;
     }
-    .contact-item a:hover { text-decoration: underline; }
+    .contact-item a:hover { color: var(--leather); }
+    .contact-cta {
+      background: var(--ivory); border: 1px solid var(--parchment);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .contact-cta h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 500; color: var(--espresso);
+      margin-bottom: 0.75rem;
+    }
+    .contact-cta p {
+      font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
     .social-link {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.75rem 1.5rem; background: var(--fb-blue); color: var(--white);
-      text-decoration: none; border-radius: 4px; font-size: 0.92rem;
-      font-weight: 500; transition: background 0.2s;
+      padding: 0.8rem 1.75rem; background: var(--espresso); color: var(--cream);
+      text-decoration: none; font-size: 0.8rem;
+      font-weight: 500; transition: background 0.3s;
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .social-link:hover { background: #1565d8; }
+    .social-link:hover { background: var(--dark); }
 
     /* FOOTER */
     footer {
-      background: var(--black); color: rgba(255,255,255,0.5);
-      padding: 2rem 1.5rem; text-align: center; font-size: 0.85rem;
+      background: var(--espresso);
+      color: rgba(250,245,237,0.35);
+      padding: 3rem 2rem; text-align: center;
+      font-size: 0.8rem; letter-spacing: 0.04em;
+      border-top: 1px solid rgba(196, 148, 58, 0.1);
     }
-    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
-    footer a:hover { color: var(--white); }
+    footer a { color: rgba(250,245,237,0.5); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+    footer .footer-logo {
+      width: 50px; height: 50px; border-radius: 50%;
+      margin-bottom: 1.25rem; opacity: 0.4;
+      border: 1px solid rgba(196, 148, 58, 0.2);
+    }
 
     /* MOBILE */
     @media (max-width: 768px) {
       nav .links { display: none; }
-      .hero-content img { width: 120px; height: 120px; }
-      section { padding: 3.5rem 1.25rem; }
+      nav { padding: 0.65rem 1.25rem; }
+      .hero-content img { width: 110px; height: 110px; }
+      section { padding: 4rem 1.25rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card + .service-card { border-left: 1px solid var(--parchment); border-top: none; }
+      .about-layout { grid-template-columns: 1fr; gap: 2rem; }
       .stats { gap: 2rem; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .review-card { flex: 0 0 280px; }
-      .fb-layout {
-        grid-template-columns: 1fr;
-      }
-      .fb-sidebar {
-        position: static;
-        max-width: 400px;
-        margin: 0 auto;
-      }
+      .gallery-grid .gallery-tall { grid-row: span 1; }
+      .review-card { flex: 0 0 300px; }
+      .fb-layout { grid-template-columns: 1fr; }
+      .fb-sidebar { position: static; max-width: 400px; margin: 0 auto; }
+      .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
     }
   </style>
 </head>
@@ -399,12 +578,13 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-content">
     <img src="images/logo.png" alt="Little Black Horse Barefoot Trims logo">
-    <h1>Little Black Horse<br>Barefoot Trims</h1>
-    <p class="tagline">Barefoot trimming &amp; hoof building</p>
-    <p class="location">Columbia, SC</p>
+    <p class="hero-tagline">Barefoot trimming &amp; hoof building</p>
+    <h1>Little Black Horse<br><em>Barefoot Trims</em></h1>
+    <p class="hero-location">Columbia, South Carolina</p>
     <div class="hero-contact">
       <p class="hero-name">Mariah Simmons</p>
       <a href="tel:+12533443145" class="hero-phone">
@@ -414,7 +594,7 @@
     </div>
     <div class="hero-ctas">
       <a href="#contact" class="cta">Get in Touch</a>
-      <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener" class="cta cta-fb">
+      <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener" class="cta cta-secondary">
         <svg class="fb-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         Follow on Facebook
       </a>
@@ -422,23 +602,51 @@
   </div>
 </div>
 
+<!-- SERVICES -->
 <section id="services" class="services">
-  <div class="container">
+  <div class="container fade-up">
+    <div class="section-label">What We Do</div>
     <h2 class="section-title">Services</h2>
-    <p class="section-subtitle">Hooves of all sizes welcome &mdash; donkeys, minis, drafts, and all.</p>
+    <p class="section-subtitle">Hooves of all sizes welcome &mdash; donkeys, minis, drafts, and everything in between.</p>
     <div class="services-grid">
       <div class="service-card">
-        <span class="service-icon" aria-hidden="true">&#x1f9f2;</span>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M28 8c-6 0-12 4-14 12-2 8 0 16 2 22 1 3 3 6 6 6h12c3 0 5-3 6-6 2-6 4-14 2-22-2-8-8-12-14-12z"/>
+            <path d="M22 28c0 6 3 12 6 16M34 28c0 6-3 12-6 16"/>
+            <path d="M20 20h16" opacity="0.4"/>
+            <path d="M18 32h20" opacity="0.4"/>
+            <circle cx="28" cy="14" r="1.5" fill="currentColor" stroke="none" opacity="0.3"/>
+          </svg>
+        </div>
         <h3>Barefoot Trimming</h3>
         <p>Natural hoof care focused on building healthy, strong bare hooves through frequent proper trimming that simulates natural wear.</p>
       </div>
       <div class="service-card">
-        <span class="service-icon" aria-hidden="true">&#x1f3d7;&#xfe0f;</span>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M28 48c-6 0-12-4-14-12-2-8 0-16 2-22 1-3 3-6 6-6h12c3 0 5 3 6 6 2 6 4 14 2 22-2 8-8 12-14 12z"/>
+            <path d="M28 6v-3M28 3l-3-1M28 3l3-1"/>
+            <path d="M22 6l-2-4M34 6l2-4"/>
+            <path d="M24 28c0-4 2-8 4-12M32 28c0-4-2-8-4-12"/>
+            <path d="M18 36h20" opacity="0.4"/>
+          </svg>
+        </div>
         <h3>Hoof Building</h3>
         <p>Corrective and rehabilitative trimming to restore your horse's true angles and develop a strong, well-balanced hoof over time.</p>
       </div>
       <div class="service-card">
-        <span class="service-icon" aria-hidden="true">&#x1f6e1;&#xfe0f;</span>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 28c0-10 6-18 14-18s14 8 14 18"/>
+            <path d="M10 28h36" stroke-width="2.5"/>
+            <path d="M12 28c0 4 1 8 3 10M44 28c0 4-1 8-3 10"/>
+            <path d="M20 32v6M28 32v8M36 32v6"/>
+            <circle cx="14" cy="24" r="1.5" fill="currentColor" stroke="none" opacity="0.3"/>
+            <circle cx="42" cy="24" r="1.5" fill="currentColor" stroke="none" opacity="0.3"/>
+            <path d="M22 16c2-3 4-4 6-4s4 1 6 4" opacity="0.4"/>
+          </svg>
+        </div>
         <h3>Glue-Ons</h3>
         <p>Composite shoes for horses needing extra support during rehabilitation or for comfort and soundness.</p>
       </div>
@@ -446,53 +654,70 @@
   </div>
 </section>
 
-<section id="about">
-  <div class="container">
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="container fade-up">
+    <div class="section-label">Philosophy</div>
     <h2 class="section-title">About</h2>
-    <p class="section-subtitle">Building strong hooves from the ground up.</p>
-    <div class="about-text">
-      <p>My focus goes less to the angles and more to the health and strength of the bare hoof. I believe that should be optimized before considering a prosthetic, unless it's actually going to improve the health and strength of the foot.</p>
-      <p>Frequent proper trimming to simulate natural wear and promote healthy development works by knowing the shapes of the internal anatomy and finding the natural shapes in the external anatomy. There are more curves than straight lines inside and out &mdash; these curves need to be respected and built over time to achieve optimal alignment and integrity.</p>
-      <p>True strength comes from building the core of the digital cushion, not from propping a weak foot up on a false external foundation.</p>
-    </div>
-    <div class="stats">
-      <div class="stat-item">
-        <div class="stat-value">100%</div>
-        <div class="stat-label">Recommended (12 reviews)</div>
+    <div class="about-layout">
+      <div class="about-quote">
+        True strength comes from building the core of the digital cushion, not from propping a weak foot up on a false external foundation.
       </div>
-      <div class="stat-item">
-        <div class="stat-value">287</div>
-        <div class="stat-label">Facebook followers</div>
+      <div>
+        <div class="about-text">
+          <p>My focus goes less to the angles and more to the health and strength of the bare hoof. I believe that should be optimized before considering a prosthetic, unless it's actually going to improve the health and strength of the foot.</p>
+          <p>Frequent proper trimming to simulate natural wear and promote healthy development works by knowing the shapes of the internal anatomy and finding the natural shapes in the external anatomy. There are more curves than straight lines inside and out &mdash; these curves need to be respected and built over time.</p>
+        </div>
+        <div class="stats">
+          <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Recommended</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">12</div>
+            <div class="stat-label">5-Star Reviews</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">287</div>
+            <div class="stat-label">Followers</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- GALLERY -->
 <section id="gallery" class="gallery">
-  <div class="container">
+  <div class="container fade-up">
+    <div class="section-label">Recent Work</div>
     <h2 class="section-title">Gallery</h2>
-    <p class="section-subtitle">Some of my recent work.</p>
+    <p class="section-subtitle">A look at the craft behind every trim.</p>
     <div class="gallery-grid">
-      <img src="images/gallery-1.jpg" alt="Glue-on hoof boots on horse" loading="lazy">
-      <img src="images/gallery-2.jpg" alt="Horse hoof after barefoot trim" loading="lazy">
-      <img src="images/gallery-3.jpg" alt="Barefoot trimming in progress" loading="lazy">
-      <img src="images/gallery-4.jpg" alt="Hoof building equipment" loading="lazy">
-      <img src="images/gallery-5.jpg" alt="Hoof care work" loading="lazy">
-      <img src="images/gallery-6.jpg" alt="Horse hooves" loading="lazy">
+      <div class="gallery-item gallery-tall"><img src="images/gallery-1.jpg" alt="Glue-on hoof boots on horse" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-2.jpg" alt="Horse hoof after barefoot trim" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-3.jpg" alt="Barefoot trimming in progress" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-4.jpg" alt="Hoof building equipment" loading="lazy"></div>
+      <div class="gallery-item gallery-tall"><img src="images/gallery-5.jpg" alt="Hoof care work" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-6.jpg" alt="Horse hooves" loading="lazy"></div>
     </div>
   </div>
 </section>
 
+<!-- REVIEWS -->
 <section id="reviews" class="reviews">
   <div class="container">
-    <div class="reviews-header">
-      <h2 class="section-title">Reviews</h2>
-      <span class="reviews-badge">
-        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-        100% Recommend
-      </span>
+    <div class="fade-up">
+      <div class="section-label">Testimonials</div>
+      <div class="reviews-header">
+        <h2 class="section-title">Reviews</h2>
+        <span class="reviews-badge">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          100% Recommend
+        </span>
+      </div>
+      <p class="section-subtitle">What horse owners are saying about Mariah Simmons.</p>
     </div>
-    <p class="section-subtitle">What horse owners are saying about Mariah Simmons.</p>
     <div class="reviews-scroll-wrapper">
       <div class="reviews-track">
 
@@ -500,152 +725,92 @@
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
           <p class="review-text">Mariah is a knowledgeable barefoot trimmer that really cares. Highly recommend!</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Thank you so much!!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Robin Boyle</span>
-            <span class="review-date">April 2026</span>
-          </div>
+          <div class="review-reply"><strong>Mariah replied:</strong>Thank you so much!!</div>
+          <div class="review-meta"><span class="review-author">Robin Boyle</span><span class="review-date">April 2026</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">Mariah is so patient and willing to meet the horse wherever they're at! I have a very challenging horse who struggles with having his feet done. She has been a godsend with not only getting the job done, but also working a schedule to keep his feet healthy and improve how the process goes. I highly recommend her!!!!</p>
-          <div class="review-meta">
-            <span class="review-author">Stacey Manning</span>
-            <span class="review-date">March 2026</span>
-          </div>
+          <p class="review-text">Mariah is so patient and willing to meet the horse wherever they're at! I have a very challenging horse who struggles with having his feet done. She has been a godsend with not only getting the job done, but also working a schedule to keep his feet healthy. I highly recommend her!!!!</p>
+          <div class="review-meta"><span class="review-author">Stacey Manning</span><span class="review-date">March 2026</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">Mariah has been a God send. She's been trimming my horses for the last 3 months and every single time she puts their feet back down they lick, chew, yawn, and look at her like they are telling her thank you! I can't wait to see how my horses feet are another 3-6 months from now. I'm a client for life!</p>
-          <div class="review-meta">
-            <span class="review-author">Jessica Marie Wolf</span>
-            <span class="review-date">December 2025</span>
-          </div>
+          <p class="review-text">Mariah has been a God send. Every single time she puts their feet back down they lick, chew, yawn, and look at her like they are telling her thank you! I'm a client for life!</p>
+          <div class="review-meta"><span class="review-author">Jessica Marie Wolf</span><span class="review-date">December 2025</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">So thankful for Mariah. She has recently started doing our two mares and has been nothing short of amazing. She is patient, on time and always does a great job. She cares for your horses more than any farrier I have met. Highly recommend!</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Thank you so much!!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Caitlyn Morris</span>
-            <span class="review-date">August 2025</span>
-          </div>
+          <p class="review-text">So thankful for Mariah. She has recently started doing our two mares and has been nothing short of amazing. She cares for your horses more than any farrier I have met. Highly recommend!</p>
+          <div class="review-reply"><strong>Mariah replied:</strong>Thank you so much!!</div>
+          <div class="review-meta"><span class="review-author">Caitlyn Morris</span><span class="review-date">August 2025</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">Mariah has turned my whole herd around. We have been able to pull shoes on horses who &ldquo;needed&rdquo; them and they are completely sound and comfortable barefoot! She always shows up the day you schedule and has great communication. She is willing to work on the challenging hooves others wont.</p>
-          <div class="review-meta">
-            <span class="review-author">Devon Tracy</span>
-            <span class="review-date">June 2025</span>
-          </div>
+          <p class="review-text">Mariah has turned my whole herd around. We have been able to pull shoes on horses who &ldquo;needed&rdquo; them and they are completely sound and comfortable barefoot! She is willing to work on the challenging hooves others wont.</p>
+          <div class="review-meta"><span class="review-author">Devon Tracy</span><span class="review-date">June 2025</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">I am so glad to have Mariah in my area! She has my geldings, both young and old, looking and feeling better from the very first trim. She cares about the whole horse, and not just their hooves. My herd only wishes I found her sooner. You can't go wrong, and your horses will thank you.</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Thank you!!!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Bridget Edge</span>
-            <span class="review-date">April 2025</span>
-          </div>
+          <p class="review-text">I am so glad to have Mariah in my area! She has my geldings, both young and old, looking and feeling better from the very first trim. She cares about the whole horse. You can't go wrong, and your horses will thank you.</p>
+          <div class="review-reply"><strong>Mariah replied:</strong>Thank you!!!</div>
+          <div class="review-meta"><span class="review-author">Bridget Edge</span><span class="review-date">April 2025</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">Mariah is wonderful, my horse loves her and soon my neighbors horses will too. My girl is easy, but the neighbors horses are a bit difficult, Mariah is very patient with them. In time they will be as easy as my horse!</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Aww thank you!! Cat is a wonderful girl! The feeling is mutual!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Alexa Nye</span>
-            <span class="review-date">April 2025</span>
-          </div>
+          <p class="review-text">Mariah is wonderful, my horse loves her. My girl is easy, but the neighbors horses are a bit difficult, Mariah is very patient with them. In time they will be as easy as my horse!</p>
+          <div class="review-reply"><strong>Mariah replied:</strong>Aww thank you!! Cat is a wonderful girl!</div>
+          <div class="review-meta"><span class="review-author">Alexa Nye</span><span class="review-date">April 2025</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">Mariah has been awesome to have as our barefoot farrier. She comes regularly, every 4 weeks, and my horse hooves have never looked so great. We dealt with ongoing sulcus thrush on one horse that cleared up in 3 weeks after her trim. She's a true horse lover.</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Aww thank you so much!! I love your boys!!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Shelly Gottschling</span>
-            <span class="review-date">February 2025</span>
-          </div>
+          <p class="review-text">Mariah has been awesome to have as our barefoot farrier. She comes regularly, every 4 weeks, and my horse hooves have never looked so great. She's a true horse lover.</p>
+          <div class="review-reply"><strong>Mariah replied:</strong>Aww thank you so much!! I love your boys!!</div>
+          <div class="review-meta"><span class="review-author">Shelly Gottschling</span><span class="review-date">February 2025</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
           <p class="review-text">She takes her time and is so sweet with the ponies. Their feet look great and have already seen a difference in their movement!</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Thank you!!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Brianna Curle</span>
-            <span class="review-date">January 2025</span>
-          </div>
+          <div class="review-reply"><strong>Mariah replied:</strong>Thank you!!</div>
+          <div class="review-meta"><span class="review-author">Brianna Curle</span><span class="review-date">January 2025</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
           <p class="review-text">Doing such a wonderful job with my gelding! He's never been sore after a trim and she is so incredibly patient.</p>
-          <div class="review-meta">
-            <span class="review-author">Spotted Horse LLC</span>
-            <span class="review-date">December 2024</span>
-          </div>
+          <div class="review-meta"><span class="review-author">Spotted Horse LLC</span><span class="review-date">December 2024</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">Mariah is so wonderful and my horse loves her. She takes her time to make sure he is comfortable during the trim. She has an eye for detail and notices what the hoof is telling us! She eliminated hoof wall separation and chipping I had been fighting all summer in two trims. We are grateful to have found her.</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Aww thank you!! Biggie is a great guy!! Glad I get to work with him!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Caroline Kosh</span>
-            <span class="review-date">November 2024</span>
-          </div>
+          <p class="review-text">Mariah is so wonderful. She has an eye for detail and notices what the hoof is telling us! She eliminated hoof wall separation and chipping I had been fighting all summer in two trims.</p>
+          <div class="review-reply"><strong>Mariah replied:</strong>Aww thank you!! Biggie is a great guy!!</div>
+          <div class="review-meta"><span class="review-author">Caroline Kosh</span><span class="review-date">November 2024</span></div>
         </div>
 
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <span class="review-quote">&ldquo;</span>
-          <p class="review-text">She was wonderful with my gelding. Took her time, explained everything to me in detail, and made sure my horse was super comfortable throughout it and he adored her. Licking and chewing, yawning, and falling asleep!</p>
-          <div class="review-reply">
-            <strong>Mariah replied:</strong>
-            Thank you Chloe! Perry was a sweetheart, I look forward to hanging out with him some more!
-          </div>
-          <div class="review-meta">
-            <span class="review-author">Chloe Johnson</span>
-            <span class="review-date">November 2024</span>
-          </div>
+          <p class="review-text">She was wonderful with my gelding. Took her time, explained everything in detail, and made sure my horse was super comfortable. Licking and chewing, yawning, and falling asleep!</p>
+          <div class="review-reply"><strong>Mariah replied:</strong>Thank you Chloe! Perry was a sweetheart!</div>
+          <div class="review-meta"><span class="review-author">Chloe Johnson</span><span class="review-date">November 2024</span></div>
         </div>
 
       </div>
@@ -657,23 +822,20 @@
   </div>
 </section>
 
+<!-- FACEBOOK -->
 <section id="facebook" class="facebook-section">
-  <div class="container">
+  <div class="container fade-up">
+    <div class="section-label">Follow Along</div>
     <h2 class="section-title">Latest Updates</h2>
-    <p class="section-subtitle">Follow along on Facebook for the latest posts, photos, and hoof care tips.</p>
+    <p class="section-subtitle">Posts, photos, and hoof care tips from Facebook.</p>
     <div class="fb-layout">
       <div class="fb-sidebar">
         <div class="fb-page-wrapper">
           <div class="fb-page"
             data-href="https://www.facebook.com/profile.php?id=61569612563299"
-            data-tabs="timeline"
-            data-width="340"
-            data-height="500"
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true"
-            data-lazy="true">
+            data-tabs="timeline" data-width="340" data-height="500"
+            data-small-header="false" data-adapt-container-width="true"
+            data-hide-cover="false" data-show-facepile="true" data-lazy="true">
             <blockquote cite="https://www.facebook.com/profile.php?id=61569612563299" class="fb-xfbml-parse-ignore">
               <a href="https://www.facebook.com/profile.php?id=61569612563299">Little Black Horse Barefoot Trims</a>
             </blockquote>
@@ -684,26 +846,17 @@
         <div class="fb-post-wrapper">
           <div class="fb-post"
             data-href="https://www.facebook.com/permalink.php?story_fbid=pfbid0kpCGyKRPPZSZTuQsJndd3iYnFyx8f84qkyrBEdP8A1a2CuCBuVmo3e6n1zNdhXtVl&id=61569612563299"
-            data-width="500"
-            data-show-text="true"
-            data-lazy="true">
-          </div>
+            data-width="500" data-show-text="true" data-lazy="true"></div>
         </div>
         <div class="fb-post-wrapper">
           <div class="fb-post"
             data-href="https://www.facebook.com/permalink.php?story_fbid=pfbid0u4RgGoQUimjpZniczu6a1hnXn1D7VdesAi3Cc1E5kHczD8WAsHn3G4o4Ewgov1v6l&id=61569612563299"
-            data-width="500"
-            data-show-text="true"
-            data-lazy="true">
-          </div>
+            data-width="500" data-show-text="true" data-lazy="true"></div>
         </div>
         <div class="fb-post-wrapper">
           <div class="fb-post"
             data-href="https://www.facebook.com/permalink.php?story_fbid=pfbid0274K7WCaQHtJwwgP2Z8Cs3WEUpqw7DYtjma2sB984bbTx2VXS8oG6zyLz4q9CLT8ul&id=61569612563299"
-            data-width="500"
-            data-show-text="true"
-            data-lazy="true">
-          </div>
+            data-width="500" data-show-text="true" data-lazy="true"></div>
         </div>
         <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener" class="fb-view-all">
           <svg class="fb-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -714,34 +867,57 @@
   </div>
 </section>
 
-<section id="contact">
-  <div class="container">
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container fade-up">
+    <div class="section-label">Reach Out</div>
     <h2 class="section-title">Contact</h2>
-    <p class="section-subtitle">Ready to give your horse the best hoof care? Reach out.</p>
-    <div class="contact-info">
-      <div class="contact-item">
-        <h3>Phone</h3>
-        <a href="tel:+12533443145">(253) 344-3145</a>
+    <p class="section-subtitle">Ready to give your horse the best hoof care?</p>
+    <div class="contact-layout">
+      <div class="contact-details">
+        <div class="contact-item">
+          <h3>Phone</h3>
+          <a href="tel:+12533443145">(253) 344-3145</a>
+        </div>
+        <div class="contact-item">
+          <h3>Location</h3>
+          <p>Columbia, South Carolina</p>
+        </div>
+        <div class="contact-item">
+          <h3>Price Range</h3>
+          <p>$$</p>
+        </div>
       </div>
-      <div class="contact-item">
-        <h3>Location</h3>
-        <p>Columbia, SC</p>
-      </div>
-      <div class="contact-item">
-        <h3>Price Range</h3>
-        <p>$$</p>
+      <div class="contact-cta">
+        <h3>Let's talk about your horse</h3>
+        <p>Whether you're looking to transition to barefoot, need rehabilitative trimming, or want to explore composite shoes &mdash; reach out for a conversation.</p>
+        <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener" class="social-link">
+          <svg class="fb-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Message on Facebook
+        </a>
       </div>
     </div>
-    <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener" class="social-link">
-      <svg class="fb-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      Follow on Facebook
-    </a>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
+  <img src="images/logo.png" alt="Little Black Horse" class="footer-logo">
   <p>&copy; 2025 Little Black Horse Barefoot Trims &middot; Columbia, SC &middot; <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener">Facebook</a></p>
 </footer>
+
+<!-- Scroll animations -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
