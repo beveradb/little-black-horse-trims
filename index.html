@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Black Horse Barefoot Trims | Columbia, SC</title>
+  <meta name="description" content="Professional barefoot trimming, hoof building, and glue-on services in Columbia, SC. All hooves welcome - donkeys, minis, drafts, and more.">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #1a1a1a;
+      --dark: #2c2c2c;
+      --warm: #4a3728;
+      --accent: #6b4c3b;
+      --light: #f5f0eb;
+      --white: #ffffff;
+      --text: #3a3a3a;
+      --text-light: #6a6a6a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background: var(--white);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 26, 26, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 0.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    nav .brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none; color: var(--white);
+    }
+    nav .brand img { width: 36px; height: 36px; border-radius: 50%; }
+    nav .brand span { font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; }
+    nav .links { display: flex; gap: 1.5rem; }
+    nav .links a {
+      color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem;
+      letter-spacing: 0.03em; text-transform: uppercase; transition: color 0.2s;
+    }
+    nav .links a:hover { color: var(--white); }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: url('images/hero.jpg') center/cover no-repeat;
+      opacity: 0.45;
+    }
+    .hero-content {
+      position: relative; text-align: center; padding: 2rem;
+      max-width: 700px;
+    }
+    .hero-content img {
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.9);
+      margin-bottom: 1.5rem;
+      background: var(--white);
+    }
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--white); font-weight: 700;
+      letter-spacing: 0.02em; margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .hero-content .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,0.85); margin-bottom: 0.5rem;
+    }
+    .hero-content .location {
+      font-size: 0.95rem; color: rgba(255,255,255,0.65);
+      margin-bottom: 2rem;
+    }
+    .hero-content .cta {
+      display: inline-block; padding: 0.85rem 2.2rem;
+      background: var(--white); color: var(--black);
+      text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      border-radius: 4px; letter-spacing: 0.02em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-content .cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+
+    /* SECTIONS */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .section-title {
+      font-size: 1.8rem; font-weight: 700; color: var(--black);
+      margin-bottom: 0.5rem; letter-spacing: 0.01em;
+    }
+    .section-subtitle {
+      font-size: 1rem; color: var(--text-light); margin-bottom: 2.5rem;
+    }
+
+    /* SERVICES */
+    .services { background: var(--light); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white); padding: 2rem; border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .service-card h3 {
+      font-size: 1.15rem; color: var(--black); margin-bottom: 0.5rem;
+    }
+    .service-card p { font-size: 0.92rem; color: var(--text-light); line-height: 1.6; }
+    .service-icon {
+      font-size: 1.6rem; margin-bottom: 0.75rem; display: block;
+    }
+
+    /* ABOUT */
+    .about-text {
+      font-size: 1.05rem; line-height: 1.8; color: var(--text);
+      max-width: 700px;
+    }
+    .about-text p + p { margin-top: 1rem; }
+    .stats {
+      display: flex; gap: 3rem; margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .stat-item .stat-value {
+      font-size: 1.5rem; font-weight: 700; color: var(--black);
+    }
+    .stat-item .stat-label {
+      font-size: 0.85rem; color: var(--text-light);
+    }
+
+    /* GALLERY */
+    .gallery { background: var(--light); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .gallery-grid img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      border-radius: 4px; transition: transform 0.3s;
+    }
+    .gallery-grid img:hover { transform: scale(1.02); }
+
+    /* CONTACT */
+    .contact-info {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem; margin-bottom: 2rem;
+    }
+    .contact-item h3 {
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--text-light); margin-bottom: 0.5rem;
+    }
+    .contact-item a, .contact-item p {
+      font-size: 1.05rem; color: var(--black); text-decoration: none;
+    }
+    .contact-item a:hover { text-decoration: underline; }
+    .social-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; background: var(--black); color: var(--white);
+      text-decoration: none; border-radius: 4px; font-size: 0.92rem;
+      font-weight: 500; transition: background 0.2s;
+    }
+    .social-link:hover { background: var(--dark); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black); color: rgba(255,255,255,0.5);
+      padding: 2rem 1.5rem; text-align: center; font-size: 0.85rem;
+    }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      nav .links { display: none; }
+      .hero-content img { width: 120px; height: 120px; }
+      section { padding: 3.5rem 1.25rem; }
+      .stats { gap: 2rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="brand">
+    <img src="images/logo.png" alt="Little Black Horse logo">
+    <span>Little Black Horse</span>
+  </a>
+  <div class="links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <img src="images/logo.png" alt="Little Black Horse Barefoot Trims logo">
+    <h1>Little Black Horse<br>Barefoot Trims</h1>
+    <p class="tagline">Barefoot trimming &amp; hoof building</p>
+    <p class="location">Columbia, SC</p>
+    <a href="#contact" class="cta">Get in Touch</a>
+  </div>
+</div>
+
+<section id="services" class="services">
+  <div class="container">
+    <h2 class="section-title">Services</h2>
+    <p class="section-subtitle">Hooves of all sizes welcome &mdash; donkeys, minis, drafts, and all.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon" aria-hidden="true">&#x1f9f2;</span>
+        <h3>Barefoot Trimming</h3>
+        <p>Natural hoof care focused on building healthy, strong bare hooves through frequent proper trimming that simulates natural wear.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon" aria-hidden="true">&#x1f3d7;&#xfe0f;</span>
+        <h3>Hoof Building</h3>
+        <p>Corrective and rehabilitative trimming to restore your horse's true angles and develop a strong, well-balanced hoof over time.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon" aria-hidden="true">&#x1f6e1;&#xfe0f;</span>
+        <h3>Glue-Ons</h3>
+        <p>Protective glue-on boots and shoes for horses needing extra support during rehabilitation or for comfort and soundness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About</h2>
+    <p class="section-subtitle">Building strong hooves from the ground up.</p>
+    <div class="about-text">
+      <p>My focus goes less to the angles and more to the health and strength of the bare hoof. I believe that should be optimized before considering a prosthetic, unless it's actually going to improve the health and strength of the foot.</p>
+      <p>Frequent proper trimming to simulate natural wear and promote healthy development works by knowing the shapes of the internal anatomy and finding the natural shapes in the external anatomy. There are more curves than straight lines inside and out &mdash; these curves need to be respected and built over time to achieve optimal alignment and integrity.</p>
+      <p>True strength comes from building the core of the digital cushion, not from propping a weak foot up on a false external foundation.</p>
+    </div>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Recommended (12 reviews)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">287</div>
+        <div class="stat-label">Facebook followers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="gallery">
+  <div class="container">
+    <h2 class="section-title">Gallery</h2>
+    <p class="section-subtitle">Some of my recent work.</p>
+    <div class="gallery-grid">
+      <img src="images/gallery-1.jpg" alt="Glue-on hoof boots on horse" loading="lazy">
+      <img src="images/gallery-2.jpg" alt="Horse hoof after barefoot trim" loading="lazy">
+      <img src="images/gallery-3.jpg" alt="Barefoot trimming in progress" loading="lazy">
+      <img src="images/gallery-4.jpg" alt="Hoof building equipment" loading="lazy">
+      <img src="images/gallery-5.jpg" alt="Hoof care work" loading="lazy">
+      <img src="images/gallery-6.jpg" alt="Horse hooves" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-subtitle">Ready to give your horse the best hoof care? Reach out.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <h3>Phone</h3>
+        <a href="tel:+12533443145">(253) 344-3145</a>
+      </div>
+      <div class="contact-item">
+        <h3>Location</h3>
+        <p>Columbia, SC</p>
+      </div>
+      <div class="contact-item">
+        <h3>Price Range</h3>
+        <p>$$</p>
+      </div>
+    </div>
+    <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener" class="social-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Follow on Facebook
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Little Black Horse Barefoot Trims. Columbia, SC.</p>
+</footer>
+
+</body>
+</html>

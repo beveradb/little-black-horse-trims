@@ -1,0 +1,7 @@
+.DS_Store
+.playwright-mcp/
+page-*.png
+page-*.md
+extracted-content.json
+photos/
+littleblackhorse-logo.png
