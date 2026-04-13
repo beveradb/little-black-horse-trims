@@ -312,28 +312,73 @@
     /* GALLERY */
     .gallery { background: var(--white); }
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto;
-      gap: 0.75rem;
+      columns: 4;
+      column-gap: 0.5rem;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 0.5rem;
+      overflow: hidden; position: relative; cursor: pointer;
     }
     .gallery-grid img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; display: block;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s;
       filter: saturate(0.85);
     }
-    .gallery-grid img:hover {
-      transform: scale(1.03);
+    .gallery-item:hover img {
+      transform: scale(1.04);
       filter: saturate(1);
-    }
-    .gallery-grid .gallery-tall { grid-row: span 2; }
-    .gallery-item {
-      overflow: hidden; position: relative;
     }
     .gallery-item::after {
       content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 60%, rgba(28,18,8,0.15) 100%);
+      background: linear-gradient(180deg, transparent 50%, rgba(28,18,8,0.2) 100%);
       pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover::after { opacity: 0.5; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(28, 18, 8, 0.95);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .lightbox.active { opacity: 1; pointer-events: all; }
+    .lightbox img {
+      max-width: 90vw; max-height: 85vh;
+      object-fit: contain;
+      transform: scale(0.92);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .lightbox.active img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 44px; height: 44px;
+      background: rgba(250, 245, 237, 0.1); border: 1px solid rgba(250, 245, 237, 0.15);
+      color: var(--cream); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; line-height: 1;
+      transition: background 0.3s;
+    }
+    .lightbox-close:hover { background: rgba(250, 245, 237, 0.2); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px;
+      background: rgba(250, 245, 237, 0.08); border: 1px solid rgba(250, 245, 237, 0.12);
+      color: var(--cream); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: background 0.3s;
+    }
+    .lightbox-nav:hover { background: rgba(250, 245, 237, 0.18); }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+    .lightbox-counter {
+      position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      color: rgba(250, 245, 237, 0.4); font-size: 0.78rem;
+      letter-spacing: 0.1em; font-weight: 500;
     }
 
     /* REVIEWS */
@@ -545,8 +590,7 @@
       .service-card + .service-card { border-left: 1px solid var(--parchment); border-top: none; }
       .about-layout { grid-template-columns: 1fr; gap: 2rem; }
       .stats { gap: 2rem; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-grid .gallery-tall { grid-row: span 1; }
+      .gallery-grid { columns: 2; }
       .review-card { flex: 0 0 300px; }
       .fb-layout { grid-template-columns: 1fr; }
       .fb-sidebar { position: static; max-width: 400px; margin: 0 auto; }
@@ -694,12 +738,26 @@
     <h2 class="section-title">Gallery</h2>
     <p class="section-subtitle">A look at the craft behind every trim.</p>
     <div class="gallery-grid">
-      <div class="gallery-item gallery-tall"><img src="images/gallery-1.jpg" alt="Glue-on hoof boots on horse" loading="lazy"></div>
-      <div class="gallery-item"><img src="images/gallery-2.jpg" alt="Horse hoof after barefoot trim" loading="lazy"></div>
-      <div class="gallery-item"><img src="images/gallery-3.jpg" alt="Barefoot trimming in progress" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-07.jpg" alt="Mariah sharing a moment with a grey horse" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-11.jpg" alt="Before and after hoof comparison - side view" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-17.jpg" alt="Chestnut horse portrait" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-14.jpg" alt="Rasping a hoof - close-up action" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-08.jpg" alt="Mariah working on a dark bay horse in the barn" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-15.jpg" alt="Freshly trimmed hoof sole" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-1.jpg" alt="Glue-on composite shoes on horse" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-16.jpg" alt="Black horse grazing in pasture" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-12.jpg" alt="Before and after hoof sole comparison" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-10.jpg" alt="Mariah trimming outdoors in sunshine" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-19.jpg" alt="Trimming with curious horses looking on" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-09.jpg" alt="Mariah trimming in covered work area" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-18.jpg" alt="Small pinto horse nuzzling Mariah" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-5.jpg" alt="Hoof care work" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-13.jpg" alt="Before and after hoof front view" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-21.jpg" alt="Dramatically lit hoof sole" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-20.jpg" alt="Three horses in Santa hats" loading="lazy"></div>
       <div class="gallery-item"><img src="images/gallery-4.jpg" alt="Hoof building equipment" loading="lazy"></div>
-      <div class="gallery-item gallery-tall"><img src="images/gallery-5.jpg" alt="Hoof care work" loading="lazy"></div>
-      <div class="gallery-item"><img src="images/gallery-6.jpg" alt="Horse hooves" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-6.jpg" alt="Horse hooves close-up" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-3.jpg" alt="Barefoot trimming in progress" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -906,8 +964,17 @@
   <p>&copy; 2025 Little Black Horse Barefoot Trims &middot; Columbia, SC &middot; <a href="https://www.facebook.com/profile.php?id=61569612563299" target="_blank" rel="noopener">Facebook</a></p>
 </footer>
 
-<!-- Scroll animations -->
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+  <img src="" alt="">
+  <div class="lightbox-counter"></div>
+</div>
+
 <script>
+  // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -917,6 +984,45 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Lightbox
+  (() => {
+    const lb = document.getElementById('lightbox');
+    const lbImg = lb.querySelector('img');
+    const lbCounter = lb.querySelector('.lightbox-counter');
+    const items = [...document.querySelectorAll('.gallery-item img')];
+    let current = 0;
+
+    function show(i) {
+      current = (i + items.length) % items.length;
+      lbImg.src = items[current].src;
+      lbImg.alt = items[current].alt;
+      lbCounter.textContent = `${current + 1} / ${items.length}`;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hide() {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    items.forEach((img, i) => {
+      img.closest('.gallery-item').addEventListener('click', () => show(i));
+    });
+
+    lb.querySelector('.lightbox-close').addEventListener('click', hide);
+    lb.querySelector('.lightbox-prev').addEventListener('click', () => show(current - 1));
+    lb.querySelector('.lightbox-next').addEventListener('click', () => show(current + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) hide(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') hide();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
 </script>
 
 </body>
